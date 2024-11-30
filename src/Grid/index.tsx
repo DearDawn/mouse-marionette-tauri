@@ -12,8 +12,10 @@ export const Grid: FC = () => {
     useMousePosition(activeRowKey, activeColKey);
 
     useEffect(() => {
-        if (enterGridMode) {
-            getCurrentWebview().show();
+        if (enterGridMode && inited) {
+            setTimeout(() => {
+                getCurrentWebview().show();
+            }, 0);
         } else {
             setTimeout(
                 () => {
@@ -22,7 +24,7 @@ export const Grid: FC = () => {
                 inited ? 0 : 2000
             );
         }
-    }, [enterGridMode]);
+    }, [enterGridMode, inited]);
 
     if (!enterGridMode && !inited)
         return (

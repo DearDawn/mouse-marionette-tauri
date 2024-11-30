@@ -15,15 +15,17 @@ export const useGlobalShortcut = () => {
   useMount(async () => {
     await register('Control+F', async (e) => {
       if (e.state === "Pressed") {
-        setEnterGridMode(!enterGridMode)
         await moveWindowToCursorMonitor();
+        setEnterGridMode(!enterGridMode);
+        if (!enterGridMode && !inited) {
+          setInited(true)
+        }
       }
     });
   })
 
   useEffect(() => {
     if (enterGridMode) {
-      setInited(true)
       register('Escape', (e) => {
         if (e.state === "Pressed") {
           setEnterGridMode(false)
