@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "mouse-marionette-tauri",
+  "productName": "mouse-marionette",
   "version": "0.1.0",
-  "identifier": "com.mouse-marionette-tauri.app",
+  "identifier": "com.mouse-marionette.app",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:1420",
@@ -13,7 +13,7 @@
     "macOSPrivateApi": true,
     "windows": [
       {
-        "title": "mouse-marionette-tauri",
+        "title": "mouse-marionette",
         "width": 1000,
         "height": 800,
         "transparent": true,

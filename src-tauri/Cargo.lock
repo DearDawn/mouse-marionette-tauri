@@ -1920,7 +1920,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "mouse-marionette-tauri"
+name = "mouse-marionette"
 version = "0.1.0"
 dependencies = [
  "cocoa 0.24.1",
