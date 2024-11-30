@@ -26,6 +26,12 @@
     ],
     "security": {
       "csp": null
+    },
+    "trayIcon": {
+      "iconPath": "icons/icon.png",
+      "id": "marionette",
+      "title": "marionette",
+      "tooltip": "mouse marionette"
     }
   },
   "bundle": {

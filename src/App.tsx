@@ -37,13 +37,8 @@ function App() {
     }
 
     useMount(async () => {
-        TrayIcon.new({
-            icon: 'icons/32x32.png',
-            title: '鼠标傀儡',
-            tooltip: '键盘控制鼠标',
-            menuOnLeftClick: true,
-            menu: await createMenu(),
-        });
+        const tray = await TrayIcon.getById('marionette');
+        tray?.setMenu(await createMenu());
     });
 
     return (
