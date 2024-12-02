@@ -1,15 +1,16 @@
 import { FC, useEffect } from 'react';
 import clsx from 'clsx';
-import { useGlobalShortcut, useMousePosition } from '../hooks';
+import { useGlobalShortcut, useMouseMove, useMousePosition } from '../hooks';
 import styles from './styles.module.less';
-import { GRID_KEYS } from '../constant';
+import { GRID_KEYS, MINI_GRID_KEYS } from '../constant';
 import { getCurrentWebview } from '@tauri-apps/api/webview';
 import LogoImage from '/src-tauri/icons/128x128@2x.png';
 
 export const Grid: FC = () => {
-    const { keyPos, inited, enterGridMode } = useGlobalShortcut();
+    const { keyPos, numPos, inited, enterGridMode } = useGlobalShortcut();
     const [activeRowKey, activeColKey] = keyPos || [];
-    useMousePosition(activeRowKey, activeColKey);
+    useMousePosition(activeRowKey, activeColKey, numPos);
+    useMouseMove(enterGridMode);
 
     useEffect(() => {
         if (enterGridMode && inited) {
@@ -43,9 +44,26 @@ export const Grid: FC = () => {
                             [styles.active]:
                                 rowKey === activeRowKey ||
                                 colKey === activeColKey,
+                            [styles.activeTarget]:
+                                rowKey === activeRowKey &&
+                                colKey === activeColKey,
                         })}
                     >
                         {`${rowKey}${colKey}`}
+                        {rowKey === activeRowKey && colKey === activeColKey && (
+                            <div className={styles.miniGrid}>
+                                {MINI_GRID_KEYS.map((miniKey) => (
+                                    <div
+                                        className={clsx(styles.miniGridItem, {
+                                            [styles.active]: miniKey === numPos,
+                                        })}
+                                        key={miniKey}
+                                    >
+                                        {miniKey}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 ))
             )}
