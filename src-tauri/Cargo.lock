@@ -1921,7 +1921,7 @@ dependencies = [
 
 [[package]]
 name = "mouse-marionette"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "cocoa 0.24.1",
  "core-foundation 0.9.4",
