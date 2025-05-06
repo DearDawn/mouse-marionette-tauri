@@ -81,6 +81,15 @@ fn enable_click_through(window: id) {
     }
 }
 
+#[tauri::command]
+fn set_window_level(window: tauri::WebviewWindow, level: f64) {
+    #[cfg(target_os = "macos")]
+    unsafe {
+        use objc::{msg_send, sel, sel_impl};
+        let ns_window = window.ns_window().unwrap() as *mut objc::runtime::Object;
+        let _: () = msg_send![ns_window, setLevel: level as i32];
+    }
+}
 fn hide_in_mission_control(window: id) {
     unsafe {
         let ns_window = window as id;
@@ -139,6 +148,7 @@ pub fn run() {
             let ns_window: *mut objc::runtime::Object = window.ns_window().unwrap() as *mut _;
             enable_click_through(ns_window);
             hide_in_mission_control(ns_window);
+            set_window_level(window, 64 as f64);
 
             Ok(())
         })
